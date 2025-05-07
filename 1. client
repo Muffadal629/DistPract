@@ -1,0 +1,40 @@
+import java.rmi.*;
+import java.rmi.Naming;
+
+
+public class AddClient{
+  public static void main(String args[]){
+    if(args.length < 3){
+      System.out.println("Usage: java AddClient <server_ip> <num1> <num2>");
+    }
+    
+    try{
+    
+      String addServerURL = "//" + args[0] + "/AddServer"; 
+      AddServerIntf addServerIntf = (AddServerIntf) Naming.lookup(addServerURL);
+      
+      System.out.println("The First Number is: " + args[1]);
+      double num1 = Double.parseDouble(args[1]);
+      
+      System.out.println("The Second Number is: " + args[2]);
+      double num2 = Double.parseDouble(args[2]);
+      
+      System.out.println("--------------------Results--------------------");
+      System.out.println("Addition is : " + addServerIntf.addition(num1,num2));
+      System.out.println("Subtraction is : " + addServerIntf.subtraction(num1,num2));
+      System.out.println("Multiplication is : " + addServerIntf.multiplication(num1,num2));
+      System.out.println("Division is : " + addServerIntf.division(num1,num2));
+      
+      
+      
+      
+      
+    }catch(Exception e){
+      System.out.println("Exception occurred At Client!" + e.getMessage());
+      e.printStackTrace();
+    }
+    
+    
+    
+  }
+}
